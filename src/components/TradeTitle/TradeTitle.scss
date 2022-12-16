@@ -1,0 +1,15 @@
+.trade-title {
+  display: flex;
+  align-items: center;
+
+  padding: 20px 0;
+
+  font-size: 18px;
+
+  color: $red-500;
+
+  span:not(:first-child) {
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+}

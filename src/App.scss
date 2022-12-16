@@ -1,5 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
 
-.navbar {
-  background-color: $blue-100;
-}
+// Components
+@import "components/Header/Header";
+@import "components/TradeTitle/TradeTitle";
+@import "components/Timer/Timer";
