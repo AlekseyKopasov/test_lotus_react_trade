@@ -1,0 +1,74 @@
+.bidding-table {
+  width: 100%;
+  overflow: auto;
+
+  tr {
+    background-color: $blue-100;
+  }
+
+  tr:nth-child(2n + 1) {
+    background-color: $white;
+  }
+
+  th {
+    text-align: center;
+    vertical-align: middle;
+
+    background-color: transparent;
+    border-bottom: none;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: $blue-400;
+  }
+
+  td {
+    vertical-align: middle;
+  }
+
+  tr > td:first-child {
+    min-width: 460px;
+  }
+
+  tr > td:not(:first-child) {
+    min-width: 200px;
+    vertical-align: top;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: $blue-400;
+  }
+
+  &__params-title {
+    text-align: center;
+    vertical-align: middle;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: $blue-400;
+  }
+
+  &__participants {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0;
+  }
+
+  &__price {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .original {
+    color: $red-600;
+  }
+
+  .sale {
+    color: $blue-600;
+  }
+
+  .total {
+    color: $green-600;
+  }
+}
