@@ -26,16 +26,15 @@
   }
 
   tr > td:first-child {
-    min-width: 460px;
+    min-width: 400px;
   }
 
   tr > td:not(:first-child) {
-    min-width: 200px;
+    min-width: 140px;
     vertical-align: top;
     text-align: center;
     text-transform: uppercase;
     font-weight: 400;
-    color: $blue-400;
   }
 
   &__params-title {
@@ -51,6 +50,7 @@
     flex-direction: column;
 
     margin: 0;
+    color: $blue-400;
   }
 
   &__price {

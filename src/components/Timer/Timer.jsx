@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-const Timer = ({ isActive }) => {
+const Timer = ({ isActive, progressTime = 120 }) => {
+  let timeLeft = progressTime
+  let timeInDisplay = '00:00:00'
+
+  useEffect(() => {
+    let progress = parseInt(progressTime, 10)
+    let hours   = Math.floor(progress / 3600)
+    let minutes = Math.floor(progress / 60) % 60
+    let seconds = progress % 60
+
+    timeInDisplay = [hours,minutes,seconds]
+      .map(t => t < 10 ? '0' + t : t)
+      .join(':')
+  }, [])
+
+
   return (
     <div className={ 'timer' + (isActive ? ' active' : '') }>
       <div className="timer__wrap">
         <div className="timer__card">
-          <span className="timer__time">02:00:00</span>
+          <span className="timer__time">{ timeInDisplay }</span>
           <span className="timer__icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" width="33.182" height="33.182"
                    fill="currentColor"><path
