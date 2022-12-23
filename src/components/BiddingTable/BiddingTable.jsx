@@ -1,8 +1,11 @@
 import React from 'react'
 import { Col, Container, Row, Table } from 'react-bootstrap'
 import Timer from '../Timer/Timer'
+import { useCountdown } from '../../hooks/useContdown'
 
-const BiddingTable = () => {
+const BiddingTable = ({ targetDate }) => {
+  const [hours, minutes, seconds] = useCountdown(targetDate)
+
   return (
     <Container>
       <Row>
@@ -11,7 +14,14 @@ const BiddingTable = () => {
             <thead>
               <tr>
                 <th>Ход</th>
-                <th> <Timer isActive="true"/> </th>
+                <th>
+                  <Timer
+                  isActive="true"
+                  hours={hours}
+                  minutes={minutes}
+                  seconds={seconds}
+                />
+                </th>
                 <th> <Timer /> </th>
                 <th> <Timer /> </th>
                 <th> <Timer /> </th>
