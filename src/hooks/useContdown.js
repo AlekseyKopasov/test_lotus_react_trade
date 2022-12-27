@@ -25,6 +25,10 @@ const getValues = (countDown) => {
   let minutes = Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60))
   let seconds = Math.floor((countDown % (1000 * 60)) / 1000)
 
+  if (hours + minutes + seconds <= 0) {
+    console.log(42)
+  }
+
   if (hours < 10) {
     hours = '0' + hours
   }

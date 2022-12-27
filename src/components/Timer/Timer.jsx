@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useCountdown } from '../../hooks/useContdown'
 
-const Timer = ({ timerId = '0', isActive,  hours, minutes, seconds }) => {
+const Timer = ({ timerId = '0', active, targetTime }) => {
+  const [hours, minutes, seconds] = useCountdown(targetTime)
+  const [ isActive, setIsActive ] = useState(active)
 
   if (hours + minutes + seconds <= 0) {
-    isActive = false
+    setIsActive(false)
+    return false
   }
     // remove timer
     // return id to parent
    else {
+    setIsActive(true)
     return (
       <div id={ timerId } className={ 'timer' + (isActive ? ' active' : '') }>
         <div className="timer__wrap">
