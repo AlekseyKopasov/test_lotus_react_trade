@@ -1,58 +1,61 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Col, Container, Row, Table } from 'react-bootstrap'
 import Timer from '../Timer/Timer'
 
-const timeInMs = 10 * 1000;
-const currentTime = new Date().getTime()
-const endProgressTime = currentTime + timeInMs
+const TradeTable = ({ bidders, targetTime }) => {
+  const [ activeTimer, setActiveTimer ] = useState({ id: 0, active: true })
 
-const BiddingTable = () => {
+  const toggleTimerHandler = ({ id }) => {
+    // 👇️ take parameter passed from Child component
+    setActiveTimer(...bidders.map(b => {
+      let nextTimerId = 0
+
+      if (b.id === id) {
+        b.active = false
+
+        if (b.id + 1) {
+          nextTimerId = (b.id + 1)
+           return bidders[nextTimerId].active = true
+        } else {
+          return bidders[0].active = true
+        }
+      }
+    }))
+  }
+
   return (
     <Container>
       <Row>
         <Col>
-          <Table className="bidding-table">
+          <Table className="trade-table">
             <thead>
-              <tr>
-                <th>Ход</th>
-                <th>
+            <tr>
+              <th>Ход</th>
+              { bidders.map(b => {
+                return <th key={ b.id }>
                   <Timer
-                    active={'true'}
-                    targetTime={endProgressTime}
-                />
+                    timerId={ b.id }
+                    isActive={ b.active }
+                    targetTime={ targetTime }
+                  />
                 </th>
-                <th> <Timer /> </th>
-                <th> <Timer /> </th>
-                <th> <Timer /> </th>
-              </tr>
+              }) }
+            </tr>
             </thead>
 
             <tbody>
-              <tr className="bidding-table__params">
-                <td className="bidding-table__params-title">Параметры и требования</td>
+            <tr className="trade-table__params">
+              <td className="trade-table__params-title">Параметры и требования</td>
 
-                <td>
-                  <p className="bidding-table__participants">
-                    <span className="bidding-table__participants-num">Участник №1</span>
-                    <span>Лотос</span>
+              { bidders.map(b => {
+                return <td key={ b.id }>
+                  <p className="trade-table__participants">
+                    <span className="trade-table__participants-num">Участник №{ b.id + 1 }</span>
+                    <span>{ b.name }</span>
                   </p>
                 </td>
-                <td>
-                  <p className="bidding-table__participants">
-                    <span className="bidding-table__participants-num">Участник №2</span>
-                  </p>
-                </td>
-                <td>
-                  <p className="bidding-table__participants">
-                    <span className="bidding-table__participants-num">Участник №3</span>
-                  </p>
-                </td>
-                <td>
-                  <p className="bidding-table__participants">
-                    <span className="bidding-table__participants-num">Участник №4</span>
-                  </p>
-                </td>
-              </tr>
+              }) }
+            </tr>
             <tr>
               <td>Наличие комплекса мероприятий, повышающих стандарты качества изготовления</td>
               <td>-</td>
@@ -77,47 +80,47 @@ const BiddingTable = () => {
             <tr>
               <td>Условия оплаты</td>
               <td>
-                <span className="bidding-table__percent">30</span>
+                <span className="trade-table__percent">30</span>
                 <span>&nbsp;%</span>
               </td>
               <td>
-                <span className="bidding-table__percent">100</span>
+                <span className="trade-table__percent">100</span>
                 <span>&nbsp;%</span>
               </td>
               <td>
-                <span className="bidding-table__percent">60</span>
+                <span className="trade-table__percent">60</span>
                 <span>&nbsp;%</span>
               </td>
               <td>
-                <span className="bidding-table__percent">50</span>
+                <span className="trade-table__percent">50</span>
                 <span>&nbsp;%</span>
               </td>
             </tr>
             <tr>
               <td>Стоимость изготовления лота, руб. (без НДС)</td>
               <td>
-                <p className="bidding-table__price">
+                <p className="trade-table__price">
                   <span className="original">3,700,000 руб.</span>
                   <span className="sale">-25,000 руб.</span>
                   <span className="total">2,475,000 руб.</span>
                 </p>
               </td>
               <td>
-                <p className="bidding-table__price">
+                <p className="trade-table__price">
                   <span className="original">3,200,000 руб.</span>
                   <span className="sale">-25,000 руб.</span>
                   <span className="total">2,475,000 руб.</span>
                 </p>
               </td>
               <td>
-                <p className="bidding-table__price">
+                <p className="trade-table__price">
                   <span className="original">2,800,000 руб.</span>
                   <span className="sale">-25,000 руб.</span>
                   <span className="total">2,475,000 руб.</span>
                 </p>
               </td>
               <td>
-                <p className="bidding-table__price">
+                <p className="trade-table__price">
                   <span className="original">2,500,000 руб.</span>
                   <span className="sale">-25,000 руб.</span>
                   <span className="total">2,475,000 руб.</span>
@@ -133,4 +136,4 @@ const BiddingTable = () => {
   )
 }
 
-export default BiddingTable
+export default TradeTable

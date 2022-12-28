@@ -1,15 +1,10 @@
 import './App.scss'
-import Header from './components/Header/Header'
-import BiddingTable from './components/BiddingTable/BiddingTable'
+import TradeRoom from './components/TradeRoom/TradeRoom'
 
 const App = () => {
   return (
     <div className="App">
-      <Header/>
-
-      <main>
-        <BiddingTable/>
-      </main>
+      <TradeRoom />
     </div>
   )
 }
