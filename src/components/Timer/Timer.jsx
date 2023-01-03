@@ -1,39 +1,35 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { useCountdown } from '../../hooks/useContdown'
 
-const Timer = memo(({ timerId = '0', isActive, targetTime }) => {
+const Timer = memo(({ timerId, isActive, targetTime, handleTimerToggle }) => {
   const [ hours, minutes, seconds ] = useCountdown(targetTime)
+
+  const [correctHours, setCorrectHours] = useState('00')
+  const [correctMinutes, setCorrectMinutes] = useState('00')
+  const [correctSeconds, setCorrectSeconds] = useState('00')
   // const [ isActive, setIsActive ] = useState(active)
-  let correctHours = hours
-  let correctMinutes = minutes
-  let correctSeconds = seconds
 
   useEffect(() => {
+      if (hours + minutes + seconds <= 0) {
+        // handleTimerToggle(timerId)
+      }
 
+      if (hours < 10) {
+        setCorrectHours( '0' + hours)
+      }
+
+      if (minutes < 10) {
+        setCorrectMinutes('0' + minutes)
+      }
+
+      if (seconds < 10) {
+        setCorrectSeconds('0' + seconds)
+      }
     },
-    [isActive])
+    [ hours, minutes, seconds ])
 
-  if (hours + minutes + seconds <= 0) {
-    // console.log(1)
-    return
-  }
-    //   remove time
-  // return id to parent
-  else {
-    // console.log(2)
-    if (hours < 10) {
-      correctHours = '0' + hours
-    }
 
-    if (minutes < 10) {
-      correctMinutes = '0' + minutes
-    }
-
-    if (seconds < 10) {
-      correctSeconds = '0' + seconds
-    }
-  }
-  console.log('render ' + timerId)
+  // console.log('render ' + (timerId + 1))
 
   return (
     <div id={ timerId } className={ 'timer' + (isActive ? ' active' : '') }>

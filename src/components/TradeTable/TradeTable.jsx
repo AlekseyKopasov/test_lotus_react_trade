@@ -3,24 +3,23 @@ import { Col, Container, Row, Table } from 'react-bootstrap'
 import Timer from '../Timer/Timer'
 
 const TradeTable = ({ bidders, targetTime }) => {
-  const [ activeTimer, setActiveTimer ] = useState({ id: 0, active: true })
-
-  const toggleTimerHandler = ({ id }) => {
-    // 👇️ take parameter passed from Child component
-    setActiveTimer(bidders.map(b => {
-      let nextTimerId = 0
-
-      if (b.id === id) {
-        b.active = false
-
-        if (b.id + 1) {
-          nextTimerId = (b.id + 1)
-           return bidders[nextTimerId].active = true
-        } else {
-          return bidders[0].active = true
-        }
-      }
-    }))
+  // const [ activeTimer, setActiveTimer ] = useState({ id: 0, active: true })
+  const toggleTimerHandler = (timerId) => {
+    console.log('id----', timerId)
+    // setActiveTimer(bidders.map(b => {
+    //   let nextTimerId = 0
+    //
+    //   if (b.timerId === timerId) {
+    //     b.active = false
+    //
+    //     if (b.timerId + 1) {
+    //       nextTimerId = (b.timerId + 1)
+    //        return bidders[nextTimerId].active = true
+    //     } else {
+    //       return bidders[0].active = true
+    //     }
+    //   }
+    // }))
   }
 
   return (
@@ -37,6 +36,7 @@ const TradeTable = ({ bidders, targetTime }) => {
                     timerId={ b.id }
                     isActive={ b.active }
                     targetTime={ targetTime }
+                    handleTimerToggle={ toggleTimerHandler }
                   />
                 </th>
               }) }

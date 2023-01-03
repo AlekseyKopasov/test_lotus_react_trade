@@ -1,7 +1,8 @@
 .timer {
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: space-between;
+  opacity: 0;
 
   &__wrap {
     display: flex;
@@ -50,6 +51,6 @@
   }
 
   &.active {
-    display: flex;
+   opacity: 1;
   }
 }

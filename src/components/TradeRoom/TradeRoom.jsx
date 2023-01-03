@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header'
 import TradeTable from '../TradeTable/TradeTable'
 
@@ -9,15 +9,18 @@ const bidders = [
   { id: 3, name: 'Company Name', active: false },
 ]
 
-const timeInMs = 10 * 1000
+const timeInMs = 3 * 1000
 const currentTime = new Date().getTime()
-const endTime = currentTime + timeInMs
+const targetTime = currentTime + timeInMs
 
 const TradeRoom = () => {
   return (
     <div>
+      {
+        console.log('render---', targetTime)
+      }
       <Header/>
-      <TradeTable bidders={ bidders } targetTime={ endTime }/>
+      <TradeTable bidders={ bidders } targetTime={ targetTime }/>
     </div>
   )
 }
