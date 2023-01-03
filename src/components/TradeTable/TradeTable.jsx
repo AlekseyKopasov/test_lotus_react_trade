@@ -7,7 +7,7 @@ const TradeTable = ({ bidders, targetTime }) => {
 
   const toggleTimerHandler = ({ id }) => {
     // 👇️ take parameter passed from Child component
-    setActiveTimer(...bidders.map(b => {
+    setActiveTimer(bidders.map(b => {
       let nextTimerId = 0
 
       if (b.id === id) {

@@ -1,21 +1,26 @@
-import React, { useState } from 'react'
+import React, { memo, useEffect } from 'react'
 import { useCountdown } from '../../hooks/useContdown'
 
-const Timer = ({ timerId = '0', isActive, targetTime }) => {
+const Timer = memo(({ timerId = '0', isActive, targetTime }) => {
   const [ hours, minutes, seconds ] = useCountdown(targetTime)
   // const [ isActive, setIsActive ] = useState(active)
   let correctHours = hours
   let correctMinutes = minutes
   let correctSeconds = seconds
 
+  useEffect(() => {
+
+    },
+    [isActive])
+
   if (hours + minutes + seconds <= 0) {
-    console.log(1)
+    // console.log(1)
     return
   }
     //   remove time
-  // return id to parentr
+  // return id to parent
   else {
-    console.log(2)
+    // console.log(2)
     if (hours < 10) {
       correctHours = '0' + hours
     }
@@ -28,6 +33,7 @@ const Timer = ({ timerId = '0', isActive, targetTime }) => {
       correctSeconds = '0' + seconds
     }
   }
+  console.log('render ' + timerId)
 
   return (
     <div id={ timerId } className={ 'timer' + (isActive ? ' active' : '') }>
@@ -47,6 +53,6 @@ const Timer = ({ timerId = '0', isActive, targetTime }) => {
       </div>
     </div>
   )
-}
+})
 
 export default Timer
