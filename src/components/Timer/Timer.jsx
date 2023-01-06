@@ -4,14 +4,16 @@ import { useCountdown } from '../../hooks/useContdown'
 const Timer = memo(({ timerId, isActive, targetTime, handleTimerToggle }) => {
   const [ hours, minutes, seconds ] = useCountdown(targetTime)
 
+  const refTimer = React.createRef()
+
   const [correctHours, setCorrectHours] = useState('00')
   const [correctMinutes, setCorrectMinutes] = useState('00')
   const [correctSeconds, setCorrectSeconds] = useState('00')
   // const [ isActive, setIsActive ] = useState(active)
 
   useEffect(() => {
-      if (hours + minutes + seconds <= 0) {
-        // handleTimerToggle(timerId)
+      if (hours + minutes + seconds <= 0 && isActive) {
+        handleTimerToggle(timerId, refTimer)
       }
 
       if (hours < 10) {
@@ -32,7 +34,7 @@ const Timer = memo(({ timerId, isActive, targetTime, handleTimerToggle }) => {
   // console.log('render ' + (timerId + 1))
 
   return (
-    <div id={ timerId } className={ 'timer' + (isActive ? ' active' : '') }>
+    isActive ? <div id={ timerId } className={ 'timer' + (isActive ? ' active' : '') } ref={ refTimer }>
       <div className="timer__wrap">
         <div className="timer__card">
           <span className="timer__time">{ correctHours } : { correctMinutes } : { correctSeconds }
@@ -47,7 +49,7 @@ const Timer = memo(({ timerId, isActive, targetTime, handleTimerToggle }) => {
           </span>
         </div>
       </div>
-    </div>
+    </div> : false
   )
 })
 

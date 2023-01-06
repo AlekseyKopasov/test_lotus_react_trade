@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import Header from '../Header/Header'
 import TradeTable from '../TradeTable/TradeTable'
 
@@ -13,16 +13,16 @@ const timeInMs = 3 * 1000
 const currentTime = new Date().getTime()
 const targetTime = currentTime + timeInMs
 
-const TradeRoom = () => {
+const TradeRoom = memo(() => {
   return (
     <div>
       {
-        console.log('render---', targetTime)
+        console.log('render Table---', targetTime)
       }
       <Header/>
       <TradeTable bidders={ bidders } targetTime={ targetTime }/>
     </div>
   )
-}
+})
 
 export default TradeRoom
