@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from 'react'
 import { useCountdown } from '../../hooks/useContdown'
 
-const Timer = memo(({ timerId, isActive, targetTime, handleTimerToggle }) => {
+const Timer = ({ timerId, isActive, targetTime, handleTimerToggle }) => {
   const [ hours, minutes, seconds ] = useCountdown(targetTime)
 
   const refTimer = React.createRef()
@@ -9,7 +9,6 @@ const Timer = memo(({ timerId, isActive, targetTime, handleTimerToggle }) => {
   const [correctHours, setCorrectHours] = useState('00')
   const [correctMinutes, setCorrectMinutes] = useState('00')
   const [correctSeconds, setCorrectSeconds] = useState('00')
-  // const [ isActive, setIsActive ] = useState(active)
 
   useEffect(() => {
       if (hours + minutes + seconds <= 0 && isActive) {
@@ -31,7 +30,7 @@ const Timer = memo(({ timerId, isActive, targetTime, handleTimerToggle }) => {
     [ hours, minutes, seconds ])
 
 
-  // console.log('render ' + (timerId + 1))
+  console.log('render ' + (timerId + 1))
 
   return (
     isActive ? <div id={ timerId } className={ 'timer' + (isActive ? ' active' : '') } ref={ refTimer }>
@@ -51,6 +50,6 @@ const Timer = memo(({ timerId, isActive, targetTime, handleTimerToggle }) => {
       </div>
     </div> : false
   )
-})
+}
 
 export default Timer

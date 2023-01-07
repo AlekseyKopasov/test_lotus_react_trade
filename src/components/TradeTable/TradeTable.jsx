@@ -1,39 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Col, Container, Row, Table } from 'react-bootstrap'
 import Timer from '../Timer/Timer'
 
 const TradeTable = ({ bidders, targetTime }) => {
+
   const [ activeTimer, setActiveTimer ] = useState( { id: 0, name: '', active: false } )
-  // const [ timerId, setTimerId ] = useState( 0 )
-  // const [ timer, setTimer ] = useState( bidders[0] )
   /*
   * 1. Установить первый активный таймер при монтировании
   * 2. Когда вернется ссылка на отработавший таймер - установить следуующий активный таймер
   * */
 
-  useEffect(() => {
-    setActiveTimer(activeTimer)
-  }, [activeTimer])
-
   const toggleTimerHandler = (timerId, refTimer) => {
-    // setTimerId(id)
-    // setTimer(refTimer)
-    //
-    // console.log(timer, timerId)
 
     console.log('id----', timerId, refTimer.current, activeTimer)
-    setActiveTimer(bidders.map((b) => {
-      debugger
-      let nextId = b.id + 1
-
-      b.active = false
-
-      if (bidders[nextId]) {
-        bidders[nextId].active = true
-      } else {
-        bidders[0].active = true
-      }
-      }))
   }
 
   return (
@@ -44,9 +23,8 @@ const TradeTable = ({ bidders, targetTime }) => {
             <thead>
             <tr>
               <th>Ход</th>
-              { bidders.map((elem) => {
-                if (elem.id === activeTimer.id) {
-                  return <th key={ elem.id }>
+              { bidders.map((elem) =>
+                  <th key={ elem.id }>
                     <Timer
                       timerId={ elem.id }
                       targetTime={ targetTime }
@@ -54,8 +32,7 @@ const TradeTable = ({ bidders, targetTime }) => {
                       handleTimerToggle={ toggleTimerHandler }
                     />
                   </th>
-                }
-              })
+              )
               }
             </tr>
             </thead>
