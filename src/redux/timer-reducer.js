@@ -23,7 +23,9 @@ const timerReducer = (state = initialState, action) => {
     case SET_BIDDING_TIME:
       return {
         ...state,
-        ...state.targetTime = (new Date().getTime()) + (state.timeInMs * 1000),
+        targetTime: () => {
+          return new Date().getTime() + (state.timeInMs * 1000)
+        }
       }
     case SET_TIMER:
       return {
@@ -47,7 +49,7 @@ const timerReducer = (state = initialState, action) => {
 
 const setParticipants = (participants) => ({ type: SET_PARTICIPANTS, participants })
 const setTimer = (timerId) => ({ type: SET_TIMER, timerId })
-const setTime = () => ({ type: SET_BIDDING_TIME })
+export const setTime = () => ({ type: SET_BIDDING_TIME })
 
 export const getParticipants = (participants) => (dispatch) => {
   dispatch(setParticipants(participants))
@@ -57,8 +59,9 @@ export const getTimer = (timerId) => (dispatch) => {
   dispatch(setTimer(timerId))
 }
 
-export const getBiddingTime = () => (dispatch) => {
-  dispatch(setTime())
+export const getBiddingTime = (timeInMs) => (dispatch) => {
+  const time = new Date().getTime() + (timeInMs * 1000)
+  dispatch(setTime(time))
 }
 
 export default timerReducer
