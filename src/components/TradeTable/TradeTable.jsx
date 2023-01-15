@@ -1,18 +1,20 @@
 import React, { useState } from 'react'
 import { Col, Container, Row, Table } from 'react-bootstrap'
 import Timer from '../Timer/Timer'
+import { useDispatch } from 'react-redux'
+import { toggleTimer } from '../../redux/timer-reducer'
+import timer from '../Timer/Timer'
 
 const TradeTable = ({ bidders, targetTime }) => {
-
-  const [ activeTimer, setActiveTimer ] = useState({ id: 0, name: '', active: false })
   /*
   * 1. Установить первый активный таймер при монтировании
   * 2. Когда вернется ссылка на отработавший таймер - установить следуующий активный таймер
   * */
 
+  const dispatch = useDispatch()
   const toggleTimerHandler = (timerId, refTimer) => {
-
-    console.log('id----', timerId, refTimer.current, activeTimer)
+    dispatch(toggleTimer(timerId))
+    // console.log('id----', timerId, refTimer.current)
   }
 
   return (
@@ -25,6 +27,9 @@ const TradeTable = ({ bidders, targetTime }) => {
               <th>Ход</th>
               { bidders.map((elem) =>
                 <th key={ elem.id }>
+                  {
+                    console.log(elem)
+                  }
                   <Timer
                     timerId={ elem.id }
                     targetTime={ targetTime }

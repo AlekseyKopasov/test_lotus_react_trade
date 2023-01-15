@@ -30,7 +30,7 @@ const Timer = ({ timerId, isActive, targetTime, handleTimerToggle }) => {
     [ hours, minutes, seconds ])
 
 
-  console.log('render in Timer.js ---> ' + (timerId + 1))
+  // console.log('render in Timer.js ---> ' + (timerId + 1))
 
   return (
     isActive ? <div id={ timerId } className={ 'timer' + (isActive ? ' active' : '') } ref={ refTimer }>

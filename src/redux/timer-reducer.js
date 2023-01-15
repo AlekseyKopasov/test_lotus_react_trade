@@ -29,14 +29,20 @@ const timerReducer = (state = initialState, action) => {
       return {
         ...state,
         participants: [ ...state.participants.map(p => {
-          console.log('ppppp', p)
+
           if (p.id === action.timerId) {
+            let nextId = 0
+
+            if (state.participants[p.id + 1]) {
+              nextId = p.id + 1
+            } else {
+              nextId = 0
+            }
+            console.log('nextId' , nextId)
+
             p.active = false
-            // if (p[id + 1]) {
-            //   p[id + 1].active = true
-            // } else {
-            //   p[0].active = true
-            // }
+
+            state.participants[nextId].active = true
           }
         }) ],
       }
