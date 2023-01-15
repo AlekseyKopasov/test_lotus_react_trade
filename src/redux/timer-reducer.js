@@ -1,5 +1,5 @@
 const SET_PARTICIPANTS = 'SET_PARTICIPANTS'
-const SET_TIMER = 'SET_TIMER'
+const TOGGLE_TIMER = 'TOGGLE_TIMER'
 const SET_BIDDING_TIME = 'SET_BIDDING_TIME'
 
 const initialState = {
@@ -10,7 +10,7 @@ const initialState = {
     { id: 3, name: 'Company Name', active: false },
   ],
   timeInMs: 3,
-  targetTime: 0,
+  targetTime: 0
 }
 
 const timerReducer = (state = initialState, action) => {
@@ -18,16 +18,14 @@ const timerReducer = (state = initialState, action) => {
     case SET_PARTICIPANTS:
       return {
         ...state,
-        participants: action.participants,
+        participants: action.participants
       }
     case SET_BIDDING_TIME:
       return {
         ...state,
-        targetTime: () => {
-          return new Date().getTime() + (state.timeInMs * 1000)
-        }
+        targetTime: action.targetTime
       }
-    case SET_TIMER:
+    case TOGGLE_TIMER:
       return {
         ...state,
         participants: [ ...state.participants.map(p => {
@@ -48,20 +46,7 @@ const timerReducer = (state = initialState, action) => {
 }
 
 const setParticipants = (participants) => ({ type: SET_PARTICIPANTS, participants })
-const setTimer = (timerId) => ({ type: SET_TIMER, timerId })
-export const setTime = () => ({ type: SET_BIDDING_TIME })
-
-export const getParticipants = (participants) => (dispatch) => {
-  dispatch(setParticipants(participants))
-}
-
-export const getTimer = (timerId) => (dispatch) => {
-  dispatch(setTimer(timerId))
-}
-
-export const getBiddingTime = (timeInMs) => (dispatch) => {
-  const time = new Date().getTime() + (timeInMs * 1000)
-  dispatch(setTime(time))
-}
+export const toggleTimer = (timerId) => ({ type: TOGGLE_TIMER, timerId })
+export const setTime = (targetTime) => ({ type: SET_BIDDING_TIME, targetTime })
 
 export default timerReducer

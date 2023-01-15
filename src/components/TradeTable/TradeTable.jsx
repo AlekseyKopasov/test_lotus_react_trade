@@ -4,7 +4,7 @@ import Timer from '../Timer/Timer'
 
 const TradeTable = ({ bidders, targetTime }) => {
 
-  const [ activeTimer, setActiveTimer ] = useState( { id: 0, name: '', active: false } )
+  const [ activeTimer, setActiveTimer ] = useState({ id: 0, name: '', active: false })
   /*
   * 1. Установить первый активный таймер при монтировании
   * 2. Когда вернется ссылка на отработавший таймер - установить следуующий активный таймер
@@ -24,14 +24,14 @@ const TradeTable = ({ bidders, targetTime }) => {
             <tr>
               <th>Ход</th>
               { bidders.map((elem) =>
-                  <th key={ elem.id }>
-                    <Timer
-                      timerId={ elem.id }
-                      targetTime={ targetTime }
-                      isActive={ elem.active }
-                      handleTimerToggle={ toggleTimerHandler }
-                    />
-                  </th>
+                <th key={ elem.id }>
+                  <Timer
+                    timerId={ elem.id }
+                    targetTime={ targetTime }
+                    isActive={ elem.active }
+                    handleTimerToggle={ toggleTimerHandler }
+                  />
+                </th>,
               )
               }
             </tr>

@@ -1,16 +1,33 @@
 import TradeRoom from './TradeRoom'
 import { connect } from 'react-redux'
-import { getBiddingTime, getParticipants, getTimer, setTime } from '../../redux/timer-reducer'
+import { setTime } from '../../redux/timer-reducer'
 import { useEffect, useState } from 'react'
 
 const TradeRoomContainer = (props) => {
+  const [ targetTime, setTargetTime ] = useState(props.targetTime)
 
-
-  return <TradeRoom { ...props }/>
+  useEffect(() => {
+    if (!targetTime) {
+      const time = new Date().getTime() + (props.timeInMs * 1000)
+      props.setTime(time)
+      setTargetTime(time)
+    }
+  }, [])
+  return targetTime && <TradeRoom { ...props }/>
 }
 
 const mapStateToProps = (state) => ({
-    participants: state.timer.participants
+  timeInMs: state.timer.timeInMs,
+  participants: state.timer.participants,
+  targetTime: state.timer.targetTime,
 })
 
-export default connect(mapStateToProps, { getBiddingTime })(TradeRoomContainer)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setTime(timeInMs) {
+      dispatch(setTime(timeInMs))
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TradeRoomContainer)

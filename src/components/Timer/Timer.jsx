@@ -6,9 +6,9 @@ const Timer = ({ timerId, isActive, targetTime, handleTimerToggle }) => {
 
   const refTimer = React.createRef()
 
-  const [correctHours, setCorrectHours] = useState('00')
-  const [correctMinutes, setCorrectMinutes] = useState('00')
-  const [correctSeconds, setCorrectSeconds] = useState('00')
+  const [ correctHours, setCorrectHours ] = useState('00')
+  const [ correctMinutes, setCorrectMinutes ] = useState('00')
+  const [ correctSeconds, setCorrectSeconds ] = useState('00')
 
   useEffect(() => {
       if (hours + minutes + seconds <= 0 && isActive) {
@@ -16,7 +16,7 @@ const Timer = ({ timerId, isActive, targetTime, handleTimerToggle }) => {
       }
 
       if (hours < 10) {
-        setCorrectHours( '0' + hours)
+        setCorrectHours('0' + hours)
       }
 
       if (minutes < 10) {
@@ -30,7 +30,7 @@ const Timer = ({ timerId, isActive, targetTime, handleTimerToggle }) => {
     [ hours, minutes, seconds ])
 
 
-  console.log('render ' + (timerId + 1))
+  console.log('render in Timer.js ---> ' + (timerId + 1))
 
   return (
     isActive ? <div id={ timerId } className={ 'timer' + (isActive ? ' active' : '') } ref={ refTimer }>

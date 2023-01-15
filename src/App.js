@@ -8,7 +8,7 @@ const App = () => {
   return (
     <Provider store={ store }>
       <div className="App">
-        <TradeRoomContainer />
+        <TradeRoomContainer/>
       </div>
     </Provider>
   )
