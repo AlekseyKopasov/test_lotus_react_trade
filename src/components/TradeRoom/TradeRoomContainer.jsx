@@ -13,6 +13,7 @@ const TradeRoomContainer = (props) => {
       setTargetTime(time)
     }
   }, [])
+  // console.log(props.participants)
   return targetTime && <TradeRoom { ...props }/>
 }
 

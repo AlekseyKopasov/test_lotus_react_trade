@@ -1,14 +1,26 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useCountdown } from '../../hooks/useContdown'
 
 const Timer = ({ timerId, isActive, targetTime, handleTimerToggle }) => {
   const [ hours, minutes, seconds ] = useCountdown(targetTime)
+  const [active, setActive] = useState(null)
 
   const refTimer = React.createRef()
 
   const [ correctHours, setCorrectHours ] = useState('00')
   const [ correctMinutes, setCorrectMinutes ] = useState('00')
   const [ correctSeconds, setCorrectSeconds ] = useState('00')
+
+  // const startTimer = () => {
+  //   const [ hours, minutes, seconds ] = useCountdown(targetTime)
+  //   return [ hours, minutes, seconds ]
+  // }
+
+  useEffect(() => {
+    if (!active) {
+      setActive(timerId)
+    }
+  }, [])
 
   useEffect(() => {
       if (hours + minutes + seconds <= 0 && isActive) {
@@ -29,11 +41,17 @@ const Timer = ({ timerId, isActive, targetTime, handleTimerToggle }) => {
     },
     [ hours, minutes, seconds ])
 
+  useEffect(() => {
+    setActive(timerId)
+    // startTimer()
+  }, [isActive])
+
 
   // console.log('render in Timer.js ---> ' + (timerId + 1))
+  console.log(targetTime)
 
   return (
-    isActive ? <div id={ timerId } className={ 'timer' + (isActive ? ' active' : '') } ref={ refTimer }>
+    <div id={ timerId } className={ 'timer' + (isActive ? ' active' : '') } ref={ refTimer }>
       <div className="timer__wrap">
         <div className="timer__card">
           <span className="timer__time">{ correctHours } : { correctMinutes } : { correctSeconds }
@@ -48,7 +66,7 @@ const Timer = ({ timerId, isActive, targetTime, handleTimerToggle }) => {
           </span>
         </div>
       </div>
-    </div> : false
+    </div>
   )
 }
 

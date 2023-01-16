@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Col, Container, Row, Table } from 'react-bootstrap'
 import Timer from '../Timer/Timer'
 import { useDispatch } from 'react-redux'
 import { toggleTimer } from '../../redux/timer-reducer'
-import timer from '../Timer/Timer'
 
 const TradeTable = ({ bidders, targetTime }) => {
   /*
@@ -12,7 +11,7 @@ const TradeTable = ({ bidders, targetTime }) => {
   * */
 
   const dispatch = useDispatch()
-  const toggleTimerHandler = (timerId, refTimer) => {
+  const toggleTimerHandler = (timerId) => {
     dispatch(toggleTimer(timerId))
     // console.log('id----', timerId, refTimer.current)
   }
@@ -28,7 +27,7 @@ const TradeTable = ({ bidders, targetTime }) => {
               { bidders.map((elem) =>
                 <th key={ elem.id }>
                   {
-                    console.log(elem)
+                    // console.log('timer render in table', bidders)
                   }
                   <Timer
                     timerId={ elem.id }
@@ -36,7 +35,7 @@ const TradeTable = ({ bidders, targetTime }) => {
                     isActive={ elem.active }
                     handleTimerToggle={ toggleTimerHandler }
                   />
-                </th>,
+                </th>
               )
               }
             </tr>
