@@ -7,7 +7,7 @@ const TradeRoom = (props) => {
   return (
     <div>
       <Header/>
-      <TradeTable bidders={ props.participants } targetTime={ props.targetTime }/>
+      <TradeTable participants={ props.participants } targetTime={ props.targetTime }/>
     </div>
   )
 }

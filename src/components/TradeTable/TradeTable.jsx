@@ -1,21 +1,8 @@
 import React from 'react'
 import { Col, Container, Row, Table } from 'react-bootstrap'
-import Timer from '../Timer/Timer'
-import { useDispatch } from 'react-redux'
-import { toggleTimer } from '../../redux/timer-reducer'
+import TimerContainer from '../Timer/TimerContainer'
 
-const TradeTable = ({ bidders, targetTime }) => {
-  /*
-  * 1. Установить первый активный таймер при монтировании
-  * 2. Когда вернется ссылка на отработавший таймер - установить следуующий активный таймер
-  * */
-
-  const dispatch = useDispatch()
-  const toggleTimerHandler = (timerId) => {
-    dispatch(toggleTimer(timerId))
-    // console.log('id----', timerId, refTimer.current)
-  }
-
+const TradeTable = ({ participants }) => {
   return (
     <Container>
       <Row>
@@ -24,18 +11,10 @@ const TradeTable = ({ bidders, targetTime }) => {
             <thead>
             <tr>
               <th>Ход</th>
-              { bidders.map((elem) =>
+              { participants.map((elem) =>
                 <th key={ elem.id }>
-                  {
-                    // console.log('timer render in table', bidders)
-                  }
-                  <Timer
-                    timerId={ elem.id }
-                    targetTime={ targetTime }
-                    isActive={ elem.active }
-                    handleTimerToggle={ toggleTimerHandler }
-                  />
-                </th>
+                  <TimerContainer timer={ elem }/>
+                </th>,
               )
               }
             </tr>
@@ -45,11 +24,11 @@ const TradeTable = ({ bidders, targetTime }) => {
             <tr className="trade-table__params">
               <td className="trade-table__params-title">Параметры и требования</td>
 
-              { bidders.map(b => {
-                return <td key={ b.id }>
+              { participants.map(p => {
+                return <td key={ p.id }>
                   <p className="trade-table__participants">
-                    <span className="trade-table__participants-num">Участник №{ b.id + 1 }</span>
-                    <span>{ b.name }</span>
+                    <span className="trade-table__participants-num">Участник №{ p.id + 1 }</span>
+                    <span>{ p.name }</span>
                   </p>
                 </td>
               }) }
