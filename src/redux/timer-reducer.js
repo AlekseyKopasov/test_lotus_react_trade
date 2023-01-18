@@ -1,5 +1,5 @@
 const TOGGLE_TIMER = 'TOGGLE_TIMER'
-const SET_BIDDING_TIME = 'SET_BIDDING_TIME'
+const SET_TIME = 'SET_TIME'
 
 const initialState = {
   participants: [
@@ -8,13 +8,13 @@ const initialState = {
     { id: 2, name: 'Company Name', active: false },
     { id: 3, name: 'Company Name', active: false },
   ],
-  timeInMs: 3,
+  timeInMs: 5,
   targetTime: 0,
 }
 
 const timerReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_BIDDING_TIME:
+    case SET_TIME:
       return {
         ...state,
         targetTime: action.targetTime,
@@ -45,6 +45,6 @@ const timerReducer = (state = initialState, action) => {
 }
 
 export const toggleTimer = (timerId) => ({ type: TOGGLE_TIMER, timerId })
-export const setTime = (targetTime) => ({ type: SET_BIDDING_TIME, targetTime })
+export const setTime = (targetTime) => ({ type: SET_TIME, targetTime })
 
 export default timerReducer

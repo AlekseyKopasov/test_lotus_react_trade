@@ -9,15 +9,18 @@ const TimerContainer = (props) => {
 
 const mapStateToProps = (state) => ({
   targetTime: state.timer.targetTime,
+  timeInMs: state.timer.timeInMs,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleTimerHandler: (timerId) => {
-    dispatch(toggleTimer(timerId))
+  toggleTimerHandler: async (timerId, timeInMs) => {
+    setTimeout(() => {
+      dispatch(setTime(timeInMs))
+    }, 0)
+    setTimeout(() => {
+      dispatch(toggleTimer(timerId))
+    }, 0)
   },
-  // setTime(timeInMs) {
-  //   dispatch(setTime(timeInMs))
-  // },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimerContainer)

@@ -5,21 +5,12 @@ const Timer = (props) => {
   const timerId = props.timer.id
   const isActive = props.timer.active
 
-// TODO УДАЛИТЬ REF
   const [ hours, minutes, seconds ] = useCountdown(props.targetTime)
   const [ active, setActive ] = useState(null)
-  const [ targetTime, setTargetTime ] = useState(props.targetTime)
-
-  const refTimer = React.createRef()
 
   const [ correctHours, setCorrectHours ] = useState('00')
   const [ correctMinutes, setCorrectMinutes ] = useState('00')
   const [ correctSeconds, setCorrectSeconds ] = useState('00')
-
-  // const startTimer = () => {
-  //   const [ hours, minutes, seconds ] = useCountdown(targetTime)
-  //   return [ hours, minutes, seconds ]
-  // }
 
   useEffect(() => {
     if (!active) {
@@ -29,10 +20,8 @@ const Timer = (props) => {
 
   useEffect(() => {
       if (hours + minutes + seconds <= 0 && isActive) {
-        props.handleTimerToggle(timerId, refTimer)
-        // const time = new Date().getTime() + (props.timeInMs * 1000)
-        // props.setTime(time)
-        // setTargetTime(time)
+        const updateTargetTime = new Date().getTime() + (props.timeInMs * 1000)
+        props.handleTimerToggle(timerId, updateTargetTime)
       }
 
       if (hours < 10) {
@@ -51,12 +40,11 @@ const Timer = (props) => {
 
   useEffect(() => {
     setActive(timerId)
-    // startTimer()
   }, [ isActive ])
 
   if (isActive) {
     return (
-      <div id={ timerId } className={ 'timer' + (isActive ? ' active' : '') } ref={ refTimer }>
+      <div id={ timerId } className={ 'timer' + (isActive ? ' active' : '') }>
         <div className="timer__wrap">
           <div className="timer__card">
           <span className="timer__time">{ correctHours } : { correctMinutes } : { correctSeconds }
