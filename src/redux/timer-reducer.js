@@ -5,10 +5,10 @@ const initialState = {
   participants: [
     { id: 0, name: 'Лотус', active: true },
     { id: 1, name: 'Company Name', active: false },
-    { id: 2, name: 'Company Name', active: false },
-    { id: 3, name: 'Company Name', active: false },
+    // { id: 2, name: 'Company Name', active: false },
+    // { id: 3, name: 'Company Name', active: false },
   ],
-  timeInMs: 5,
+  timeInMs: 3,
   targetTime: 0,
 }
 

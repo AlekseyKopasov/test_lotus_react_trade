@@ -1,53 +1,46 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useCountdown } from '../../hooks/useContdown'
 
 const Timer = (props) => {
+  const CORRECT_SECONDS = 2000
+
   const timerId = props.timer.id
   const isActive = props.timer.active
 
   const [ hours, minutes, seconds ] = useCountdown(props.targetTime)
-  const [ active, setActive ] = useState(null)
-
-  const [ correctHours, setCorrectHours ] = useState('00')
-  const [ correctMinutes, setCorrectMinutes ] = useState('00')
-  const [ correctSeconds, setCorrectSeconds ] = useState('00')
 
   useEffect(() => {
-    if (!active) {
-      setActive(timerId)
-    }
-  }, [])
-
-  useEffect(() => {
-      if (hours + minutes + seconds <= 0 && isActive) {
-        const updateTargetTime = new Date().getTime() + (props.timeInMs * 1000)
-        props.handleTimerToggle(timerId, updateTargetTime)
+      if (Number(hours + minutes + seconds) === 0 && isActive) {
+        console.log(1)
+        props.handleTimerToggle(timerId)
       }
 
-      if (hours < 10) {
-        setCorrectHours('0' + hours)
+      if (Number(hours + minutes + seconds) < 0 && isActive) {
+        // в это условие не зайдет - время вссегда рано 0
+        console.log(2)
+        const updateTargetTime = new Date().getTime() + CORRECT_SECONDS + (props.timeInMs * 1000)
+        props.handleTimerSetTime(updateTargetTime)
       }
 
-      if (minutes < 10) {
-        setCorrectMinutes('0' + minutes)
-      }
-
-      if (seconds < 10) {
-        setCorrectSeconds('0' + seconds)
-      }
+      // if (hours + minutes + seconds <= 0 && isActive) {
+      //   /*
+      //   * Таймер === 0
+      //   *   рендер нового таймера с дефолтным временем
+      //   * Таймер < 0
+      //   *   обновить счетчик
+      //   * */
+      //   const updateTargetTime = new Date().getTime() + CORRECT_SECONDS + (props.timeInMs * 1000)
+      //   props.handleTimerToggle(timerId, updateTargetTime)
+      // }
     },
     [ hours, minutes, seconds ])
-
-  useEffect(() => {
-    setActive(timerId)
-  }, [ isActive ])
 
   if (isActive) {
     return (
       <div id={ timerId } className={ 'timer' + (isActive ? ' active' : '') }>
         <div className="timer__wrap">
           <div className="timer__card">
-          <span className="timer__time">{ correctHours } : { correctMinutes } : { correctSeconds }
+          <span className="timer__time">{ hours } : { minutes } : { seconds }
           </span>
             <span className="timer__icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" width="33.182" height="33.182"
