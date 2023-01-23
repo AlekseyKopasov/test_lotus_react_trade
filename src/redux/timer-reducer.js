@@ -5,11 +5,12 @@ const initialState = {
   participants: [
     { id: 0, name: 'Лотус', active: true },
     { id: 1, name: 'Company Name', active: false },
-    // { id: 2, name: 'Company Name', active: false },
-    // { id: 3, name: 'Company Name', active: false },
+    { id: 2, name: 'Company Name', active: false },
+    { id: 3, name: 'Company Name', active: false },
   ],
-  timeInMs: 3,
+  timeInMs: 5,
   targetTime: 0,
+  isTimerRunning: false
 }
 
 const timerReducer = (state = initialState, action) => {
@@ -18,6 +19,7 @@ const timerReducer = (state = initialState, action) => {
       return {
         ...state,
         targetTime: action.targetTime,
+        isTimerRunning: true
       }
     case TOGGLE_TIMER:
       return {
@@ -38,6 +40,7 @@ const timerReducer = (state = initialState, action) => {
           }
           return p
         }),
+        isTimerRunning: false
       }
     default:
       return state

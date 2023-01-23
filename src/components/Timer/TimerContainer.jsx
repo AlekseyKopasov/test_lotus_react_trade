@@ -10,15 +10,16 @@ const TimerContainer = (props) => {
 const mapStateToProps = (state) => ({
   targetTime: state.timer.targetTime,
   timeInMs: state.timer.timeInMs,
+  isTimerRunning: state.timer.isTimerRunning,
 })
 
 const mapDispatchToProps = (dispatch) => ({
   toggleTimerHandler: (timerId) => {
-      dispatch(toggleTimer(timerId))
+    dispatch(toggleTimer(timerId))
   },
   handleTimerSetTime: (timeInMs) => {
     dispatch(setTime(timeInMs))
-}
+  },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimerContainer)
