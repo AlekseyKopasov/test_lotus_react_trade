@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useCountdown } from '../../hooks/useContdown'
 
 const Timer = (props) => {
@@ -8,7 +8,19 @@ const Timer = (props) => {
   const isActive = props.timer.active
   const isTimerRunning = props.timer.isTimerRunning
 
+  console.log('props.timer.id ', props.timer.id)
+
   const [ hours, minutes, seconds ] = useCountdown(props.targetTime)
+
+  const mounted = useRef(false)
+
+  useEffect(() => {
+    mounted.current = true
+
+    return () => {
+      mounted.current = false
+    }
+  }, [])
 
   useEffect(() => {
       if (hours + minutes + seconds <= 0 && isActive) {

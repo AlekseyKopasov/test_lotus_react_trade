@@ -11,6 +11,7 @@ const mapStateToProps = (state) => ({
   targetTime: state.timer.targetTime,
   timeInMs: state.timer.timeInMs,
   isTimerRunning: state.timer.isTimerRunning,
+  id: state.timer.id
 })
 
 const mapDispatchToProps = (dispatch) => ({
