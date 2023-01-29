@@ -1,16 +1,14 @@
 import React, { useEffect, useRef } from 'react'
 import { useCountdown } from '../../hooks/useContdown'
 
-const Timer = (props) => {
+const Timer = ({ targetTime, timeInMs, isTimerRunning, id, isActive }, ...props) => {
+  // console.log({ targetTime, timeInMs, isTimerRunning, id, isActive })
   const CORRECT_SECONDS = 1000
 
-  const timerId = props.timer.id
-  const isActive = props.timer.active
-  const isTimerRunning = props.timer.isTimerRunning
+  const timerId = props.timerElem.id
+  console.log(props.timerElem.id)
 
-  console.log('props.timer.id ', props.timer.id)
-
-  const [ hours, minutes, seconds ] = useCountdown(props.targetTime)
+  const [ hours, minutes, seconds ] = useCountdown(targetTime)
 
   const mounted = useRef(false)
 
@@ -24,7 +22,7 @@ const Timer = (props) => {
 
   useEffect(() => {
       if (hours + minutes + seconds <= 0 && isActive) {
-        const updateTargetTime = new Date().getTime() + CORRECT_SECONDS + (props.timeInMs * 1000)
+        const updateTargetTime = new Date().getTime() + CORRECT_SECONDS + (timeInMs * 1000)
 
         props.handleTimerSetTime(updateTargetTime)
         props.handleTimerToggle(timerId)
@@ -34,7 +32,7 @@ const Timer = (props) => {
 
   useEffect(() => {
     if (!isTimerRunning) {
-      const updateTargetTime = new Date().getTime() + CORRECT_SECONDS + (props.timeInMs * 1000)
+      const updateTargetTime = new Date().getTime() + CORRECT_SECONDS + (timeInMs * 1000)
       props.handleTimerSetTime(updateTargetTime)
     }
   }, [ isTimerRunning ])

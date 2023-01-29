@@ -13,7 +13,7 @@ const TradeTable = ({ participants }) => {
               <th>Ход</th>
               { participants.map((elem) =>
                 <th key={ elem.id }>
-                  <TimerContainer timer={ elem }/>
+                  <TimerContainer timerElem={ elem }/>
                 </th>,
               )
               }

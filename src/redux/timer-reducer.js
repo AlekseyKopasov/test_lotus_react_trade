@@ -3,10 +3,10 @@ const SET_TIME = 'SET_TIME'
 
 const initialState = {
   participants: [
-    { id: 0, name: 'Лотус', active: true },
-    { id: 1, name: 'Company Name', active: false },
-    { id: 2, name: 'Company Name', active: false },
-    { id: 3, name: 'Company Name', active: false },
+    { id: 0, name: 'Лотус', isActive: true },
+    { id: 1, name: 'Company Name', isActive: false },
+    { id: 2, name: 'Company Name', isActive: false },
+    { id: 3, name: 'Company Name', isActive: false },
   ],
   timeInMs: 5,
   targetTime: 0,
@@ -34,9 +34,9 @@ const timerReducer = (state = initialState, action) => {
               nextId = 0
             }
 
-            p.active = false
+            p.isActive = false
 
-            state.participants[nextId].active = true
+            state.participants[nextId].isActive = true
           }
           return p
         }),
