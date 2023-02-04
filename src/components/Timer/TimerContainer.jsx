@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { setTime, toggleTimer } from '../../redux/timer-reducer'
 
 const TimerContainer = (props) => {
-  return <Timer { ...props } handleTimerToggle={ props.toggleTimerHandler } handleTimerSetTime={ props.toggleTimerSetTime }/>
+  return <Timer { ...props } />
 }
 
 const mapStateToProps = (state) => ({
@@ -14,10 +14,10 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleTimerHandler: (timerId) => {
+  toggleTimerHandler(timerId) {
     dispatch(toggleTimer(timerId))
   },
-  toggleTimerSetTime: (timeInMs) => {
+  toggleTimerSetTime(timeInMs) {
     dispatch(setTime(timeInMs))
   },
 })

@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react'
 import { useCountdown } from '../../hooks/useContdown'
 
-const Timer = ({ targetTime, timeInMs, isTimerRunning, id, isActive }, ...props) => {
-  // console.log({ targetTime, timeInMs, isTimerRunning, id, isActive })
+const Timer = (props) => {
+  const { targetTime, timeInMs, isTimerRunning, timerElem = 0, toggleTimerHandler, toggleTimerSetTime } = props
   const CORRECT_SECONDS = 1000
 
-  const timerId = props.timerElem.id
-  console.log(props.timerElem.id)
+  const timerId = timerElem.id
+  const isActive= timerElem.isActive
 
   const [ hours, minutes, seconds ] = useCountdown(targetTime)
 
@@ -24,8 +24,8 @@ const Timer = ({ targetTime, timeInMs, isTimerRunning, id, isActive }, ...props)
       if (hours + minutes + seconds <= 0 && isActive) {
         const updateTargetTime = new Date().getTime() + CORRECT_SECONDS + (timeInMs * 1000)
 
-        props.handleTimerSetTime(updateTargetTime)
-        props.handleTimerToggle(timerId)
+        toggleTimerSetTime(updateTargetTime)
+        toggleTimerHandler(timerId)
       }
     },
     [ hours, minutes, seconds ])
@@ -33,7 +33,7 @@ const Timer = ({ targetTime, timeInMs, isTimerRunning, id, isActive }, ...props)
   useEffect(() => {
     if (!isTimerRunning) {
       const updateTargetTime = new Date().getTime() + CORRECT_SECONDS + (timeInMs * 1000)
-      props.handleTimerSetTime(updateTargetTime)
+      toggleTimerSetTime(updateTargetTime)
     }
   }, [ isTimerRunning ])
 
